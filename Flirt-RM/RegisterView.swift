@@ -1,20 +1,14 @@
 //
-//  LoginView.swift
+//  RegisterView.swift
 //  Flirt-RM
 //
-//  Created by Enes Ertaş on 23.05.2025.
+//  Created by Enes Ertaş on 24.05.2025.
 //
 
 import SwiftUI
 import Supabase
 
-let supabaseURL = URL(string: Bundle.main.infoDictionary?["SUPABASE_URL"] as? String ?? "")!
-let supabaseKey = Bundle.main.infoDictionary?["SUPABASE_ANON_KEY"] as? String ?? ""
-
-let supabase = SupabaseClient(supabaseURL: supabaseURL, supabaseKey: supabaseKey)
-
-
-struct LoginView: View {
+struct RegisterView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var errorMessage: String?
@@ -25,7 +19,7 @@ struct LoginView: View {
             VStack(spacing: 24) {
                 Spacer()
 
-                Image("phone") // AppIcon gibi soft illustration
+                Image("phone")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 120, height: 120)
@@ -57,8 +51,8 @@ struct LoginView: View {
                             .font(.caption)
                     }
 
-                    Button(action: handleEmailLogin) {
-                        Text(isLoading ? "Signing in..." : "Sign in")
+                    Button(action: handleRegister) {
+                        Text(isLoading ? "Registering..." : "Create Account")
                             .foregroundColor(.white)
                             .fontWeight(.semibold)
                             .frame(maxWidth: .infinity)
@@ -79,34 +73,12 @@ struct LoginView: View {
                 }
                 .padding(.horizontal)
 
-                Button(action: handleGoogleLogin) {
-                    HStack(spacing: 8) {
-                        Image("google")
-                            .resizable()
-                            .frame(width: 20, height: 20)
+                // Google ile kayıt opsiyonel, istersen buraya da eklenebilir
 
-                        Text("Sign in with Google")
-                            .fontWeight(.medium)
-                    }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.purple)
-                    .cornerRadius(12)
-                }
-                .padding(.horizontal)
-
-                // MARK: - NavigationLink
-                NavigationLink(destination: RegisterView()) {
-                    Text("New to FlirtMate? Join now")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                        .padding(.bottom, 8)
-                }
-
+                Spacer()
             }
             .padding([.horizontal, .top])
-            .padding(.bottom, 40) // 👈 Keyboard çakışmasını engeller
+            .padding(.bottom, 40)
         }
         .ignoresSafeArea(.keyboard)
         .onTapGesture {
@@ -116,29 +88,16 @@ struct LoginView: View {
         .background(Color(.systemBackground))
     }
 
-    private func handleEmailLogin() {
+    private func handleRegister() {
         Task {
             isLoading = true
             do {
-                try await supabase.auth.signIn(email: email, password: password)
-                // TODO: View geçişi burada yapılabilir
+                try await supabase.auth.signUp(email: email, password: password)
+                // TODO: Kayıt sonrası yönlendirme yapılabilir
             } catch {
                 errorMessage = error.localizedDescription
             }
             isLoading = false
-        }
-    }
-
-    private func handleGoogleLogin() {
-        Task {
-            do {
-                try await supabase.auth.signInWithOAuth(
-                    provider: .google,
-                    redirectTo: URL(string: "com.enesertas.flirtrm.signin://login-callback")
-                )
-            } catch {
-                errorMessage = error.localizedDescription
-            }
         }
     }
 }
