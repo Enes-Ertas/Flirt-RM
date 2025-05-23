@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		08A981852DE079580001747A /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 08A981842DE079580001747A /* Auth */; };
+		08A981872DE079580001747A /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 08A981862DE079580001747A /* PostgREST */; };
+		08A981892DE079580001747A /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 08A981882DE079580001747A /* Realtime */; };
+		08A9818B2DE079580001747A /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 08A9818A2DE079580001747A /* Storage */; };
+		08A9818D2DE079F40001747A /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 08A9818C2DE079F40001747A /* Supabase */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		08F6132B2DE02B010074B2DF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -29,9 +37,22 @@
 		08F613342DE02B010074B2DF /* Flirt-RMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Flirt-RMUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		08A981962DE0881F0001747A /* Exceptions for "Flirt-RM" folder in "Flirt-RM" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 08F613192DE02AFF0074B2DF /* Flirt-RM */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		08F6131C2DE02AFF0074B2DF /* Flirt-RM */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				08A981962DE0881F0001747A /* Exceptions for "Flirt-RM" folder in "Flirt-RM" target */,
+			);
 			path = "Flirt-RM";
 			sourceTree = "<group>";
 		};
@@ -52,6 +73,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08A9818D2DE079F40001747A /* Supabase in Frameworks */,
+				08A9818B2DE079580001747A /* Storage in Frameworks */,
+				08A981892DE079580001747A /* Realtime in Frameworks */,
+				08A981872DE079580001747A /* PostgREST in Frameworks */,
+				08A981852DE079580001747A /* Auth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +138,11 @@
 			);
 			name = "Flirt-RM";
 			packageProductDependencies = (
+				08A981842DE079580001747A /* Auth */,
+				08A981862DE079580001747A /* PostgREST */,
+				08A981882DE079580001747A /* Realtime */,
+				08A9818A2DE079580001747A /* Storage */,
+				08A9818C2DE079F40001747A /* Supabase */,
 			);
 			productName = "Flirt-RM";
 			productReference = 08F6131A2DE02AFF0074B2DF /* Flirt-RM.app */;
@@ -196,6 +227,9 @@
 			);
 			mainGroup = 08F613112DE02AFF0074B2DF;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				08A981832DE0778A0001747A /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 08F6131B2DE02AFF0074B2DF /* Products */;
 			projectDirPath = "";
@@ -272,6 +306,8 @@
 /* Begin XCBuildConfiguration section */
 		08F6133C2DE02B010074B2DF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 08F6131C2DE02AFF0074B2DF /* Flirt-RM */;
+			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -324,6 +360,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -335,6 +372,8 @@
 		};
 		08F6133D2DE02B010074B2DF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 08F6131C2DE02AFF0074B2DF /* Flirt-RM */;
+			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -381,6 +420,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -400,6 +440,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Flirt-RM/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -440,6 +481,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Flirt-RM/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -598,6 +640,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		08A981832DE0778A0001747A /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase-community/supabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		08A981842DE079580001747A /* Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08A981832DE0778A0001747A /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Auth;
+		};
+		08A981862DE079580001747A /* PostgREST */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08A981832DE0778A0001747A /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = PostgREST;
+		};
+		08A981882DE079580001747A /* Realtime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08A981832DE0778A0001747A /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Realtime;
+		};
+		08A9818A2DE079580001747A /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08A981832DE0778A0001747A /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Storage;
+		};
+		08A9818C2DE079F40001747A /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08A981832DE0778A0001747A /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 08F613122DE02AFF0074B2DF /* Project object */;
 }
