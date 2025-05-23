@@ -1,66 +1,44 @@
-//
-//  ContentView.swift
-//  Flirt-RM
-//
-//  Created by Enes Ertaş on 23.05.2025.
-//
-
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    var flirts = sampleFlirts
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+        NavigationView {
+            ScrollView {
+                VStack(spacing: 12) {
+                    ForEach(flirts) { flirt in
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text(flirt.name)
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.primary)
+
+                            HStack(spacing: 6) {
+                                Image(systemName: "calendar")
+                                    .foregroundColor(.secondary)
+                                Text(flirt.lastContact.formatted(date: .abbreviated, time: .omitted))
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            }
+
+                            HStack(alignment: .top, spacing: 6) {
+                                Image(systemName: "bubble.left")
+                                    .foregroundColor(.blue)
+                                Text(NSLocalizedString(flirt.gptProfileKey, comment: ""))
+                                    .font(.body)
+                                    .foregroundColor(.blue)
+                            }
+                        }
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 16).fill(Color(.systemGray6)))
+                        .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
+                        .padding(.horizontal)
                     }
                 }
-                .onDelete(perform: deleteItems)
+                .padding(.top)
             }
-#if os(macOS)
-            .navigationSplitViewColumnWidth(min: 180, ideal: 200)
-#endif
-            .toolbar {
-#if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-#endif
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
+            .navigationTitle("Flörtlerim")
         }
     }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
-    }
-}
-
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
 }
