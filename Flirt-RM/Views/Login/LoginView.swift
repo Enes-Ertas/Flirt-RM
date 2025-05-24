@@ -19,6 +19,8 @@ struct LoginView: View {
     @State private var password: String = ""
     @State private var errorMessage: String?
     @State private var isLoading = false
+    @State private var navigateToMain = false
+
 
     var body: some View {
         ScrollView {
@@ -114,6 +116,14 @@ struct LoginView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(.systemBackground))
+        .navigationDestination(isPresented: $navigateToMain) {
+            MainView()
+        }.onOpenURL { url in
+            if url.absoluteString.contains("login-callback") {
+                navigateToMain = true
+            }
+        }
+
     }
 
     private func handleEmailLogin() {
@@ -121,6 +131,7 @@ struct LoginView: View {
             isLoading = true
             do {
                 try await supabase.auth.signIn(email: email, password: password)
+                navigateToMain = true
                 // TODO: View geçişi burada yapılabilir
             } catch {
                 errorMessage = error.localizedDescription
@@ -136,9 +147,12 @@ struct LoginView: View {
                     provider: .google,
                     redirectTo: URL(string: "com.enesertas.flirtrm.signin://login-callback")
                 )
+                navigateToMain = true
             } catch {
                 errorMessage = error.localizedDescription
             }
         }
     }
+
+    
 }

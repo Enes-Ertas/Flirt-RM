@@ -22,7 +22,7 @@ struct FlirtDetailView: View {
                 HStack(alignment: .top, spacing: 8) {
                     Image(systemName: "bubble.left")
                         .foregroundColor(.blue)
-                    Text(NSLocalizedString(flirt.gptProfileKey, comment: ""))
+                    Text(NSLocalizedString(flirt.gptProfile, comment: ""))
                         .font(.body)
                         .foregroundColor(.primary)
                 }

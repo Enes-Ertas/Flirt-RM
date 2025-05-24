@@ -13,6 +13,8 @@ struct RegisterView: View {
     @State private var password: String = ""
     @State private var errorMessage: String?
     @State private var isLoading = false
+    @Environment(\.dismiss) private var dismiss
+
 
     var body: some View {
         ScrollView {
@@ -72,6 +74,13 @@ struct RegisterView: View {
                     Rectangle().frame(height: 1).foregroundColor(.gray)
                 }
                 .padding(.horizontal)
+                
+                NavigationLink(destination: LoginView()) {
+                    Text("Do you have an account? Sign in")
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                        .padding(.bottom, 8)
+                }
 
                 // Google ile kayıt opsiyonel, istersen buraya da eklenebilir
 
@@ -93,7 +102,7 @@ struct RegisterView: View {
             isLoading = true
             do {
                 try await supabase.auth.signUp(email: email, password: password)
-                // TODO: Kayıt sonrası yönlendirme yapılabilir
+                dismiss()
             } catch {
                 errorMessage = error.localizedDescription
             }

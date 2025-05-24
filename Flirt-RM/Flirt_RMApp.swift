@@ -1,12 +1,6 @@
-//
-//  Flirt_RMApp.swift
-//  Flirt-RM
-//
-//  Created by Enes Ertaş on 23.05.2025.
-//
-
 import SwiftUI
 import SwiftData
+import Supabase
 
 @main
 struct Flirt_RMApp: App {
@@ -25,7 +19,11 @@ struct Flirt_RMApp: App {
 
     var body: some Scene {
         WindowGroup {
-            WelcomeView()
+            if supabase.auth.currentSession != nil {
+                MainView()
+            } else {
+                WelcomeView()
+            }
         }
         .modelContainer(sharedModelContainer)
     }
