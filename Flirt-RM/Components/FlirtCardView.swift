@@ -27,7 +27,7 @@ struct FlirtCardView: View {
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color.fromHex("#e4cef2"))
+                .fill(Color.white)
         )
     }
 }
