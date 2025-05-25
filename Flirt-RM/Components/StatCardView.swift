@@ -1,17 +1,10 @@
-//
-//  StatCardView.swift
-//  Flirt-RM
-//
-//  Created by Enes Ertaş on 24.05.2025.
-//
-
-// StatCardView.swift
-
 import SwiftUI
 
 struct StatCardView: View {
-    let title: String
     let value: String
+    let subtitle: String
+    // isFlexible: eğer true ise genişleyebilsin, yoksa sabit 150pt olsun
+    var isFlexible: Bool = false
 
     var body: some View {
         VStack(spacing: 8) {
@@ -19,12 +12,18 @@ struct StatCardView: View {
                 .font(.system(size: 36, weight: .semibold))
                 .foregroundColor(.black)
 
-            Text(title)
+            Text(subtitle)
                 .font(.system(size: 14, weight: .light))
                 .foregroundColor(.black)
         }
-        .frame(width: 150, height: 120)
-        .background(Color.white) // Hex: #e4cef2
+        .frame(
+            // flexible ise yatayda mümkün olduğunca yer kaplasın, değilse 150pt
+            maxWidth: isFlexible ? .infinity : 150,
+            // yükseklik her zaman 120pt
+            minHeight: 120,
+            maxHeight: 150
+        )
+        .background(Color.white)
         .cornerRadius(12)
     }
 }
