@@ -1,34 +1,41 @@
-//
-//  TopNavigationBar.swift
-//  Flirt-RM
-//
-//  Created by Enes Ertaş on 24.05.2025.
-//
-
+// TopNavigationBar.swift
 import SwiftUI
 
 struct TopNavigationBar: View {
+    @Binding var isAddingFlirt: Bool
+    @Binding var isMenuOpen: Bool
+
     var body: some View {
         HStack {
-            Image("profile_photo") // Assets'e eklediğin küçük yuvarlak profil resmi
-                .resizable()
-                .scaledToFill()
-                .frame(width: 32, height: 32)
-                .clipShape(Circle())
+            // — Sidebar Leading Icon —
+            Button {
+                withAnimation(.easeInOut) { isMenuOpen.toggle() }
+            } label: {
+                Image(systemName: "sidebar.leading")
+                    .font(.system(size: 24))
+                    .foregroundColor(.gray)
+            }
 
             Spacer()
 
             Text("FlirtMate")
                 .font(.system(size: 16, weight: .medium))
-                .foregroundColor(.white)
+                .foregroundColor(.gray)
 
             Spacer()
 
-            Image(systemName: "line.horizontal.3")
-                .font(.system(size: 24))
-                .foregroundColor(.white)
+            // — “+” to Add New Flirt —
+            Button {
+                isAddingFlirt = true
+            } label: {
+                Image(systemName: "plus.circle")
+                    .font(.system(size: 24, weight: .semibold))
+                    .foregroundColor(.gray)
+            }
         }
         .padding(.horizontal, 20)
-        .padding(.top, 4)
+        .padding(.top, 8)
+        .frame(height: 56)
+        .background(Color.black)
     }
 }

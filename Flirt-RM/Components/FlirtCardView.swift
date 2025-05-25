@@ -6,7 +6,14 @@ struct FlirtCardView: View {
     let lastContact: String
 
     var body: some View {
-        HStack {
+        HStack(spacing: 16) {
+            // — Profil fotoğrafı ikonu (placeholder) —
+            Image(systemName: "person.crop.circle.fill")
+                .resizable()
+                .frame(width: 40, height: 40)
+                .foregroundColor(.gray)
+
+            // — Metinler —
             VStack(alignment: .leading, spacing: 8) {
                 Text(name)
                     .font(.title3)
@@ -20,7 +27,8 @@ struct FlirtCardView: View {
                     .font(.caption2)
                     .foregroundColor(.gray)
             }
-            Spacer() // ❗️Sola doğru ittirir
+
+            Spacer()
         }
         .padding(.vertical, 12)
         .padding(.horizontal, 24)

@@ -12,10 +12,10 @@ struct TodayFlirtsSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Today's Flirts")
+            Text("Flirts")
                 .font(.system(size: 20, weight: .light))
                 .padding(.horizontal, 4)
-                .foregroundColor(.white)
+                .foregroundColor(.gray)
 
             VStack(spacing: 16) {
                 ForEach(flirts) { flirt in

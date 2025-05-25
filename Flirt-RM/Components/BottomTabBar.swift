@@ -1,9 +1,5 @@
-//
-//  BottomTabBar.swift
-//  Flirt-RM
-//
-//  Created by Enes Ertaş on 24.05.2025.
-//
+// BottomTabBar.swift
+// Flirt-RM
 
 import SwiftUI
 
@@ -11,13 +7,14 @@ struct BottomTabBar: View {
     @Binding var selectedTab: Tab
 
     enum Tab {
-        case home, chats, inbox, profile
+        case home, calendar, inbox, profile
     }
 
     var body: some View {
         HStack(spacing: 40) {
             tabButton(icon: "house", tab: .home)
-            tabButton(icon: "bubble.left", tab: .chats)
+            // Chat sekmesinin yerine takvim ikonu kullanılıyor
+            tabButton(icon: "calendar", tab: .calendar)
             tabButton(icon: "tray.full", tab: .inbox)
             tabButton(icon: "person.crop.circle", tab: .profile)
         }

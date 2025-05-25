@@ -19,12 +19,14 @@ struct Flirt_RMApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if supabase.auth.currentSession != nil {
-                MainView()
-            } else {
-                WelcomeView()
-            }
-        }
+            NavigationStack {
+                           if supabase.auth.currentSession != nil {
+                               MainView()
+                           } else {
+                               WelcomeView()
+                           }
+                       }
+                   }
         .modelContainer(sharedModelContainer)
     }
 }

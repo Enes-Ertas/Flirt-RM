@@ -1,34 +1,53 @@
+// MainView.swift
 import SwiftUI
 
 struct MainView: View {
     @State private var selectedTab: BottomTabBar.Tab = .home
+    @State private var isMenuOpen = false
+    @State private var isAddingFlirt = false
 
     var body: some View {
-        VStack(spacing: 0) {
-            // 🔝 Tüm sayfalarda gözükecek üst bar
-            TopNavigationBar()
-                .padding(.horizontal, 20)
-                .padding(.top, 8)
-                .background(Color.black)
+        ZStack(alignment: .leading) {
+            // — Underlying content —
+            VStack(spacing: 0) {
+                TopNavigationBar(isAddingFlirt: $isAddingFlirt, isMenuOpen: $isMenuOpen)
 
-            // 📄 Sayfa içeriği (Değişken)
-            Group {
-                switch selectedTab {
-                case .home:
-                    DashboardView()
-                case .chats:
-                    Text("Chats View (Coming Soon)")
-                case .inbox:
-                    Text("Inbox View (Coming Soon)")
-                case .profile:
-                    Text("Profile View (Coming Soon)")
+                Group {
+                    switch selectedTab {
+                    case .home:    DashboardView()
+                    case .calendar:   Text("Calendar View (Coming Soon)")
+                    case .inbox:   Text("Inbox View (Coming Soon)")
+                    case .profile: Text("Profile View (Coming Soon)")
+                    }
                 }
+                .ignoresSafeArea(.keyboard)
+
+                BottomTabBar(selectedTab: $selectedTab)
+            }
+            .disabled(isMenuOpen) // Menüyü açınca arkayı dokunulmaz yap
+
+            // — Semi-transparent backdrop —
+            if isMenuOpen {
+                Color.black.opacity(0.4)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        withAnimation { isMenuOpen = false }
+                    }
             }
 
-            // 🔻 Alt navigasyon
-            BottomTabBar(selectedTab: $selectedTab)
+            // — The actual drawer —
+            if isMenuOpen {
+                SideMenuView(isOpen: $isMenuOpen)
+                    .transition(.move(edge: .leading))
+            }
+
+            // — Navigation to AddFlirtView —
+            NavigationLink(
+                destination: AddFlirtView(),
+                isActive: $isAddingFlirt,
+                label: EmptyView.init
+            )
         }
-        .ignoresSafeArea(.keyboard)
+        .animation(.easeInOut, value: isMenuOpen)
     }
 }
-
